@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Vuejs</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    </head>
+    <body>
+        <style>
+            .no_float{
+                margin: 0 auto;
+                display: block;
+                float: none;
+            }
+        </style>
+
+        <div class="container" id="main">
+            <div class="row">
+                <h2 class="text-center">Real Madrid</h2>
+                <h4 class="text-center">Movimientos</h4>
+                <div class="col-md-7 o_float">
+                    <ul class="list-group">
+                        <draggable :list="list" class="dragArea" :move="checkMove">
+                            <li v-for="(element, index) in list" class="list-group-item">
+                                <span class="badge"> {{element.num}}</span>
+                                {{element.name}} - posición anterior {{ index }}
+                            </li>
+                        </draggable>
+                    </ul>
+                    <pre>{{a}}</pre>
+                </div>
+                <div class="col-md-5 o_float">
+                    <pre>
+                    {{$data || json}}
+               </pre>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+        <!-- CDNJS :: Vue (https://cdnjs.com/) -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
+        <!-- CDNJS :: Sortable (https://cdnjs.com/) -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/Sortable/1.6.0/Sortable.min.js"></script>
+        <!-- CDNJS :: Vue.Draggable (https://cdnjs.com/) -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.14.1/vuedraggable.min.js"></script>
+        <script>
+            var vm = new Vue({
+                el: "#main",
+                data: {
+                    list:[
+                        {name:"KEYLOR NAVAS Portero", num: 1},
+                        {name:"K. CASILLA Portero", num: 13},
+                        {name:"SERGIO RAMOS Defensa", num: 4} ,
+                        {name:"RONALDO Delantero", num: 7} ,
+                        {name:"BENZEMA Delantero", num: 9},
+                    ],
+                    a: ''
+                },
+                methods:{
+                    checkMove: evt=>{
+                        this.a = evt.dragged.innerText;
+
+                    }
+                }
+            });
+
+        </script>
+    </body>
+</html>
